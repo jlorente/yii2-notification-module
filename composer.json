@@ -1,0 +1,22 @@
+{
+    "name": "jlorente/yii2-notification-module",
+    "description": "Yii2 Notification Module provides Yii2 with a powerful notification architecture",
+    "keywords": ["yii2", "notification", "notifier", "notifiable", "notify"],
+    "homepage": "https://github.com/jlorente/yii2-notification-module",
+    "type": "yii2-extension",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jose Lorente Martin",
+            "email": "jose.lorente.martin@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "jlorente\\notification\\": ""
+        }
+    }
+}
