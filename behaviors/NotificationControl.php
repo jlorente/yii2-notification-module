@@ -22,6 +22,7 @@ class NotificationControl extends ActionFilter {
         if (Yii::$app->user->isGuest === false) {
             $this->checkNotification();
         }
+        return true;
     }
 
     protected function checkNotification() {
