@@ -42,13 +42,13 @@ class NotificationNavDecorator extends Widget {
 
     protected function decorate() {
         $item = $this->createItem();
-        array_splice($this->nav->items, $this->position, 0, $item);
+        array_splice($this->nav->items, $this->position, 0, [$item]);
     }
 
     protected function createItem() {
         $notifications = Notification::findAll(['user_id' => Yii::$app->user->id]);
         $label = Html::tag('i', '', ['class' => $this->icon]);
-        $item = ['label' => &$label];
+        $item['label'] = &$label;
         if (count($notifications) > 0) {
             $label .= Html::tag('span', count($notifications), ['class' => 'badge']);
             $items = [];
@@ -68,7 +68,7 @@ class NotificationNavDecorator extends Widget {
         if (is_numeric($pos) === false) {
             throw new InvalidConfigException('Position must be a numeric value');
         }
-        $this->pos = $pos;
+        $this->position = $pos;
     }
 
 }
