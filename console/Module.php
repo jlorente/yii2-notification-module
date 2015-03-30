@@ -7,7 +7,7 @@
  * @version     1.0
  */
 
-namespace jlorente\console;
+namespace jlorente\notification\console;
 
 use yii\base\Module as BaseModule;
 

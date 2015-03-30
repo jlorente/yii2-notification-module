@@ -28,7 +28,7 @@ class NotificationControl extends ActionFilter {
     protected function checkNotification() {
         Notification::deleteAll([
             'user_id' => Yii::$app->user->id,
-            'path_info' => Notification::hash(Yii::$app->request->getPathInfo())
+            'path_info' => Yii::$app->request->getPathInfo()
         ]);
     }
 

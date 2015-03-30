@@ -25,8 +25,6 @@ use yii\behaviors\TimestampBehavior;
  */
 class Notification extends ActiveRecord {
 
-    const HASH_PATH_INFO = 'crc32b';
-    
     /**
      * @inheritdoc
      */
@@ -40,8 +38,7 @@ class Notification extends ActiveRecord {
     public function rules() {
         return [
             [['user_id', 'created_at', 'updated_at'], 'integer'],
-            [['path_info'], 'string', 'max' => 8],
-            [['text'], 'string', 'max' => 255]
+            [['text', 'path_info'], 'string', 'max' => 255]
         ];
     }
 
@@ -66,13 +63,5 @@ class Notification extends ActiveRecord {
         return array_merge(parent::behaviors(), [
             TimestampBehavior::className(),
         ]);
-    }
-
-    public function setPathInfo($pInfo) {
-        $this->path_info = static::hash($pInfo);
-    }
-    
-    public static function hash($data) {
-        return hash(self::HASH_PATH_INFO, $data);
     }
 }
