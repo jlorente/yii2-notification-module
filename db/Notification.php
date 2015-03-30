@@ -39,7 +39,7 @@ class Notification extends ActiveRecord {
      */
     public function rules() {
         return [
-            [['identity_id', 'created_at', 'updated_at'], 'integer'],
+            [['user_id', 'created_at', 'updated_at'], 'integer'],
             [['path_info'], 'string', 'max' => 8],
             [['text'], 'string', 'max' => 255]
         ];

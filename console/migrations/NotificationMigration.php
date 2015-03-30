@@ -25,7 +25,7 @@ class NotificationMigration extends Migration {
         $this->createTable('ntf_notification', [
             'id' => Schema::TYPE_PK,
             'user_id' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'path_info' => Schema::TYPE_STRING . '(8) NOT NULL',
+            'path_info' => Schema::TYPE_STRING . ' NOT NULL',
             'text' => Schema::TYPE_STRING,
             'created_at' => Schema::TYPE_INTEGER,
             'updated_at' => Schema::TYPE_INTEGER
