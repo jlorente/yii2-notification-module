@@ -19,7 +19,7 @@ class NotifierController extends Controller {
 
     public function actionSend() {
 
-        while ($mapper = NotifierMapper::findOne()) {
+        while ($mapper = NotifierMapper::find()->one()) {
             $this->processNotifierMapper($mapper);
         }
     }
