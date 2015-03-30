@@ -8,6 +8,8 @@
  */
 namespace jlorente\notification\models;
 
-interface NotifierGeneratorInterface {
+use yii\db\ActiveRecordInterface;
+
+interface NotifierGeneratorInterface extends ActiveRecordInterface {
     
 }

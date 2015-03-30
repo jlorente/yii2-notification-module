@@ -11,5 +11,8 @@ namespace jlorente\notification\models;
 
 interface NotifierInterface {
 
+    /**
+     * Executes the notifier and generates the notifications.
+     */
     public function execute();
 }
