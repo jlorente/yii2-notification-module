@@ -18,17 +18,16 @@ class NotificationControl extends ActionFilter {
     /**
      * @inheritdoc
      */
-    public function afterAction($action, $result) {
+    public function beforeAction($action) {
         if (Yii::$app->user->isGuest === false) {
             $this->checkNotification();
         }
-        return $result;
     }
 
     protected function checkNotification() {
         Notification::deleteAll([
             'user_id' => Yii::$app->user->id,
-            'path_info' => Yii::$app->request->getPathInfo()
+            'path_info' => '/' . Yii::$app->request->getPathInfo()
         ]);
     }
 
