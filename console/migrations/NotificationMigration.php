@@ -30,6 +30,8 @@ class NotificationMigration extends Migration {
             'created_at' => Schema::TYPE_INTEGER,
             'updated_at' => Schema::TYPE_INTEGER
         ]);
+        
+        $this->createIndex('INDEX_PathInfo', 'ntf_notification', 'path_info(255)');
     }
 
     public function down() {

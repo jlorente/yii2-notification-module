@@ -15,6 +15,7 @@ use yii\base\InvalidConfigException;
 use Yii;
 use jlorente\notification\db\Notification;
 use yii\helpers\Html;
+use yii\db\Query;
 
 class NotificationNavDecorator extends Widget {
 
@@ -46,14 +47,19 @@ class NotificationNavDecorator extends Widget {
     }
 
     protected function createItem() {
-        $notifications = Notification::findAll(['user_id' => Yii::$app->user->id]);
+        $nQuery = (new Query())->from(Notification::tableName())->where(['user_id' => Yii::$app->user->id]);
+        $nCount = $nQuery->count();
+        $notifications = $nQuery->select(['path_info', 'text', 'n' => 'COUNT(*)'])->groupBy(['path_info'])->all();
         $label = Html::tag('i', '', ['class' => $this->icon]);
         $item['label'] = &$label;
-        if (count($notifications) > 0) {
-            $label .= Html::tag('span', count($notifications), ['class' => 'badge']);
+        if ($nCount > 0) {
+            $label .= Html::tag('span', $nCount, ['class' => 'badge']);
             $items = [];
+
             foreach ($notifications as $notification) {
-                $items[] = ['label' => $notification->text, 'url' => $notification->path_info];
+                $items[] = ['label' => Yii::t('notifications', $notification['text'], [
+                        'count' => $notification['n']
+                    ]), 'url' => $notification['path_info']];
             }
             $item['items'] = $items;
         }
