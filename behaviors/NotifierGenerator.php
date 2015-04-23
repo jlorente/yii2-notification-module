@@ -39,6 +39,20 @@ class NotifierGenerator extends Behavior {
     public $classes = [];
 
     /**
+     * An callable property that evaluates if the notifier must be created or not.
+     * The callable receives the owner model as parameter. It must return a 
+     * boolean in order to proceed with the execution or not.
+     * 
+     * 
+     * function ($model) {
+     *    return boolean;
+     * }
+     * 
+     * @var callable
+     */
+    public $condition;
+
+    /**
      * @inheritdoc
      */
     public function init() {
@@ -63,6 +77,9 @@ class NotifierGenerator extends Behavior {
      */
     public function execute($event) {
         if (!empty($this->classes[$event->name])) {
+            if (is_callable($this->condition) && call_user_func($this->condition, $this->owner) === false) {
+                return;
+            }
             $class = $this->classes[$event->name];
             $notifier = new $class();
             if (($notifier instanceof Notifier) === false) {
